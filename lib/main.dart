@@ -17,10 +17,18 @@ class FunFacts extends StatefulWidget {
 
 class _FunFactsState extends State<FunFacts> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ThemeProvider>(context, listen: false).loadMode();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
-        theme: themeProvider.isDarkModeChecked ? ThemeData.dark() : ThemeData.light(),
+        theme: themeProvider.isDarkModeChecked
+            ? ThemeData.dark()
+            : ThemeData.light(),
         title: 'Fun Facts',
         home: const MainScreen());
   }
