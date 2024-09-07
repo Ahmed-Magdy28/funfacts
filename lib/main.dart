@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:funfacts/providers/theme_provider.dart';
 import 'package:funfacts/screens/main_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const FunFacts());
+  runApp(ChangeNotifierProvider(
+      create: (context) => ThemeProvider(), child: const FunFacts()));
 }
 
 class FunFacts extends StatefulWidget {
@@ -15,6 +18,10 @@ class FunFacts extends StatefulWidget {
 class _FunFactsState extends State<FunFacts> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Fun Facts', home: MainScreen());
+    var themeProvider = Provider.of<ThemeProvider>(context);
+    return MaterialApp(
+        theme: themeProvider.isDarkModeChecked ? ThemeData.dark() : ThemeData.light(),
+        title: 'Fun Facts',
+        home: const MainScreen());
   }
 }
